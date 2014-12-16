@@ -1,0 +1,120 @@
+Real-world data sources
+  WiFi contact paths
+  GPS Trajectories
+    Not available for some indoor locations.
+    Altitude is required to determine which floor of a building one is located.
+    GeoLife dataset provides altitude in approximately 45% of their GPS records [GeoLife?]
+    Problem of ambiguous location associativity when considering a multi-leveled building.
+      exact GPS record may correspond to many unique locations on different floors of the same building.
+      potentially problematic for malls, sky-scrapers in urban environments
+  Call Detail Records
+    [Friendship and Mobility]
+      European cell phone service provider.
+      Two million users, 450 million phone calls, 455 days.
+      Each call records nearest cell tower to both sender and recipient of call.
+      Spatially accuracy of approximately 3km.
+      Only consider calls between recipients at least five times, between people in the same country.
+    [Evaluating Mobility Models]
+      For a city such as Seoul, average number of places in most associated cell-tower regions is 11+/- 2.
+      A person could visit 11 different places, but the sequence of visits would be lost due to the spatial coarseness of cell tower coverage.
+      Likewise, a person under a cell tower could be at any one of the 11 locations ,or they could simply be passing through the location without visiting any of the locations.
+      Mobility data captured by cell towers could indicate that a person visited 11 different places.
+  Location-based Social Networks
+    Richer semantic history.
+      Locations in Foursquare are often annotated with unique tags describing a classification of the location.
+        e.g. Indian restaurant, historical landmark, supermarket
+      Solves the problem of ambiguous location associativity.
+    Explicit social networks (who are a user's friends?)
+    Provides analyzing correlations between user's movements and friend's movements.
+    [Friendship and Mobility]
+      From check-in data provided by Gowalla and Brightkite, 84% of people checking in at a particular place have less than 20% of their check-ins preceeded by a friend's check-in at the same place [Friendship and Mobility].
+      Gowalla and Brightkite contain explicit social networks.
+        Gowalla has undirected friend graphs (both parties must agree to friendship)
+        Brightkite has directed friend graphs (possible asymmetric friendships)
+    Location-fine to coarse, Temporal fine.
+    Some LBSNs do not allow public access to user-specific location traces due to security concerns.
+      e.g. Foursquare aggregates check-in information for a particular business, specifying how many
+            unique users visited, how many people checked in, etc.
+           Twitter provides an avenue for people to publicly share their Foursquare check-ins, and thus
+            Twitter coupled with Foursquare allows for associating users to locations at certain times.
+    Sporatic frequency, bias towards user privacy. Users not willing to share that they visited a sensitive location.        
+  Bluetooth detection events
+  Hybrid Datasets
+    Nokia Mobility Data Challenge [Interdependence and predictability]
+      39 users:
+        Mobile phone number, GPS trace, call and SMS history, Bluetooth contact trace, WLAN history.
+      Not publicly available for download.
+      Friendship information can be inferred by the presence of one user's phone number in another user's address book.
+    [Contextual]
+      153 participants over 17 months, recording GPS, WiFi APs, calling logs, application interaction logs
+
+Synthetic Models
+  Individual mobility models
+    [Friendship and Mobility]
+      People show strong periodic bx during certain durations of time throughout the day.
+      Weekdays have mobility bx alternating between home and work.
+      Weekends have mobility bx alternating between home and social network driven locations.
+      Three components to model:
+        1. Spatial locations regularly visited by user, spatially correlated with a user's work and home location.
+        2. Model of temporal movement between locations
+        3. Model of movement influenced by social network (e.g. meeting friends)
+      Day-specific periodic model
+  Methods for evaluation
+    
+
+
+Constraint-based Mobility
+  Geographic constraints
+  Destinations
+    [Friendship and Mobility]
+      Discretizing the workd into 25x25km cells, and defining "home" for a particular user as the average position in the cell with the most checkins.
+      85% accuracy.
+  Velocity
+  Temporal Factors
+  Social constraints
+
+Spatiotemporal Granularity
+  Spatially coarse, Temporally coarse
+  Spatially coarse, Temporally fine
+  Spatially fine, Temporally fine
+    WiFi signatures 
+    [Evaluating Mobility Models]
+      Place is recognized with room-level accuracy in indoor and outdoor environements using GSM, WiFi, and GPS.
+      Movement patterns recorded every two minutes.
+      10 users over a period of two months.
+    [Contextual]
+      153 particular over 17 months, recording GPS, WiFI APs, calling logs, application interaction logs
+      
+
+The Predictability of Human Mobility
+  Metrics of Interest:
+    Population density in spatial region
+      [Dynamic population]
+        Cell phone records could be used to determine population density, human activity at very fine-scales in urban environments.
+        Show figure of Portugal.
+    Transition rates between spatial regions
+    Sojourn time within current location
+      [Contextual]
+    
+  [Friendship and Mobility]
+    10% of human mobility from cellular mobility data is explained by social ties.
+    30% of of movement from LBSN is explained by social ties.
+    Periodic movement explains 50% to 70%.
+    40% accuracy of location prediction at any time. Average relative distance error of 0.23% for cell phone locations and 2.7% for social check-ins.
+    NUMBER OF CHECK-INS AS A FUNCTION OF DISTANCE FROM HOME.
+      Distribution follows power law with exponential cutoff [FIGURE].
+  [Evaluating Mobility Models]
+    How much regularity and predictability is inherent in human movements?
+    Which features are strongly correlated to temporal bx?
+    Which mobility model is best for the prediction of temporal bx?
+    Key challenges:
+      Quantify predictable regularity in human bx
+      Define meaningful features for extraction of useful info
+      Predict next location within duration of stay
+  [Interdependence]
+    Use of multivariate nonlinear predictor can achieve high accuracy in forcasting future user geographic locations
+    The concept of mutual information is used to quantify correlation between two mobility traces. It is possible to exploit movement data of friends and acquaintences when available - such as through location-based social networks.
+    How the correlation measure through mutual information of mobility traces of two individuals can be used to improve human prediction movement.
+    Key findings:
+      Multivariate nonlinear time series techniques can improve prediction movement of users by considering movement of people with correlated mobility patterns.
+      Additionally, mutual information can be used to select pairs of users as inferred-friends if there is no social ties available.
