@@ -65,17 +65,32 @@ Synthetic Models
 
 Constraint-based Mobility
   Geographic constraints
+   [Contextual, Where and What]
+      Results: location and time contexts were the best predictors for conditional transitions in movement
   Destinations
     [Friendship and Mobility]
       Discretizing the workd into 25x25km cells, and defining "home" for a particular user as the average position in the cell with the most checkins.
       85% accuracy.
   Velocity
   Temporal Factors
+    [Contextual, Where and What]
+      Results: location and time contexts were the best predictors for conditional transitions in movement
+    [Time-Clustering]
+      "Time division" is used for location prediction.
+      Intelligently dividing time based on the semantic activity, as opposed to naively dividing the week into days, and the days into hours, resulted in 90.7% accurancy in short-term prediction. Naive time slicing results in 87.7% short-term prediciton accuracy.
+      Additional information on randomness and distributions of movement based on time slices: location entropy, radius of gyration, step size, spatial probability distribution of users
   Social constraints
 
 Spatiotemporal Granularity
   Spatially coarse, Temporally coarse
+    [Understanding individual]
+      Two datasets, one being CDRs, and another being regular interval (every two hours) of cell tower location.
+      Average service area of each tower is approximately 3km^2, with over 30% towers covering area of 1 km^2 or less, due to higher density of towers for areas with increase cell phone usage (i.e. urban areas)
   Spatially coarse, Temporally fine
+    [Time-Clustering]
+      Call Detail Records for voice calls, SMS, and data sessions through the Sprint CDMA network of San Francisco area.
+      Location was further estimated by analyzing travel time of the signal from the mobile device to the base station and through the use of trilaterialation. (footnote: it should be noted that having a co-author working for a major telecommunications provider provides one with a rich collection of data otherwise unaccessible to the researching community)
+      Median of accuracy is 200 meters with a variable of 200 meters.
   Spatially fine, Temporally fine
     WiFi signatures 
     [Evaluating Mobility Models]
@@ -84,7 +99,37 @@ Spatiotemporal Granularity
       10 users over a period of two months.
     [Contextual]
       153 particular over 17 months, recording GPS, WiFI APs, calling logs, application interaction logs
+    [Where and What]
+      WiFi signatures can be used to calculate a user's location based on nearby WiFi access points
+      Provides better resolution than cell tower based methods
+      Requires WiFi hotspots, though it was found that in an urban environment, users spend 2.1 +/- 1.7% of their time in non-WiFi regions [Evaluating]. This may present a problem in rural environments where WiFi adoption or population density may be sparse.
       
+
+Methods of Analysis
+  Location entropy
+    [Time-Clustering]
+  Radius of gyration
+    "The characteristic distance travelled by a user a when observed up to time t" [Understanding]
+    [Time-Clustering]
+    [Understanding]
+      P(r_g) = (r_g + r_g^0)^{-\beta_r} e^{-r_g / \kappa}
+        r_g^0 = 5.8 km
+        \beta_r = 1.65 +/- 0.15
+        \kappa = 350km
+      How does radius of gyration depend on time of observance? Results inciate the time dependence of the average radius of gyration of mobile phone users best approximated by a logarithmic increase. Asymptotic to the time of observation, radius of gyration appears similar to a saturation process.
+  Step size: how much distance was recorded between consecutive records
+    [Time-Clustering]
+    [Understanding]
+      Distribution of displacement (distances) followed exponential behavior
+        P(\delta r) = (\delta r + \delta r_0)^{-\beta} e^{-\delta r / \kappa}
+          \beta = 1.75 +/- 0.15
+          \delta r_0 = 1.5 km
+          \kappa|D_1 = 400 km cuttoff values
+          \kappa|D_2 = 80km
+        Suggesting human motion may follow a truncated Levy flight as found through earlier research into
+  Mean time to return
+    [Understanding]
+      Peaks occur at 24h, 48 h, 72h, indicating a strong tendencies for people to return regularly to locations visited before.
 
 The Predictability of Human Mobility
   Metrics of Interest:
@@ -96,6 +141,16 @@ The Predictability of Human Mobility
     Sojourn time within current location
       [Contextual]
     
+  Short-term mobility prediction
+    [Where and What]
+      "We focus on anticipating human behavior for the very short future (the next ten minutes) and on active time slots of location changes or app usage".
+        i.e. where will the user be in 10 minutes if he/she is about to move
+    [Contextual] addresses the question "when will the user leave the current place"
+      Online prediction: predict the value at time t+1 when the past values up to time t are given.
+      Results: location and time contexts were the best predictors for conditional transitions in movement
+    [Time-Clustering]
+      Time of day/day of week has an impact on entropy, size of mobility and spatial distribution. Entropy is the smallest impacted. Radius of gyration, step size, spatial distriubtion change significantly based on the day and time.
+
   [Friendship and Mobility]
     10% of human mobility from cellular mobility data is explained by social ties.
     30% of of movement from LBSN is explained by social ties.
@@ -118,3 +173,9 @@ The Predictability of Human Mobility
     Key findings:
       Multivariate nonlinear time series techniques can improve prediction movement of users by considering movement of people with correlated mobility patterns.
       Additionally, mutual information can be used to select pairs of users as inferred-friends if there is no social ties available.
+  [Contextual, Where and What]
+    Estimates the conditional probabilities over the set of destinations that a user may travel given current context (i.e. location, time)
+      Location, time, app usage, Bluetooth proximity, comm. logs
+    What is the impact of each data type to the predicctive performance of next location and app usage?
+  [Time-Clustering]
+    Discretized time and location.
