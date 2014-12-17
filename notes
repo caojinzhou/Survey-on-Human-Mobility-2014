@@ -4,8 +4,19 @@ Introduction
 
 Spatiotemporal Granularity
   Spatially coarse, Temporally coarse
+    The most widely used datasets for evaluating human mobility have exhibited high temporal irregularities and spatial coarseness: call detail records (CDRs) for cellular telephones and WiFi Access Point registration logs. Common between these two data sets is the association of a user's location to that of the base station's location. However, the true location of a wireless user may be at any place where a wireless communication channel can be established between the user's device and the base station, which is often represented as a circular/hexagonal wireless connectivity range, or as a Voronoi diagram that partitions the extent of the available 2D space [Understanding individual][Limits]. This contributes to the spatial coarseness of the datasets. The temporal sparsity primarily due to human-initiated activities on their wireless device.
+    
+    CDRs represent either a voice call or an SMS occurring between two phones preserved by telecommunication companies for purposes of billing. These records have associated with them the unique identifier of the receiver and the initiater of a call, the starting and ending time of the call, and the unique identifier of the cellular tower being used as a basestation. Cross referencing the tower's identifier with the company's geographic information systems (GIS) provides the geographic coordinates of the tower. The set of surveyed papers performaning analysis on CDRs is [Limits][schneider_unravelling_2013][zhang_exploring_2014][Understanding individual][zhang_user_2014][Approaching][The Impact][Human Mobility][Evaluating Mobility Models][Friendship and Mobility][From Cells][Are][Time-Clustering]. Although these datasets are widely recorded and archived by telecommunication companies, privacy concerns and trade secrets primarily prevent such data being publicly accessible for scrutiny. The only publicly available CDR dataset of which this author is currently aware is [MIT Reality Mining]. It is observed that many of the aforementioned papers have co-authors with email domains associated with large telecommunication companies, thus hinting that strategic partnerships may enable one access to such information.
+
+\cite{gonzalez_understanding_2008, song_limits_2010, schneider_unravelling_2013, zhang_exploring_2014, zhang_user_2014}
+[Approaching][The Impact][Human Mobility][Evaluating Mobility Models][Friendship and Mobility][From Cells][Are][Time-Clustering]
+    
+    WiFi registration logs represent the action of a WiFi-enabled device attempting to connect to a WiFi Access Point (AP). Upon successful registration, the device's unique MAC address is recorded, along with the MAC address of the connected AP and the time of registration. Cross referencing the AP's MAC address with an appropriate GIS produces a geographic location of the stationary AP. WiFi registration logs do not record any activity occuring over the wireless channel, such as the downloading of content through the Internet or the deregistration of a device, and thus only represent the creation of a wireless channel.
+  
     
     WiFi contact paths
+          WiFi access point registration also exhibits spatially and temporally coarse resolutions for stationary users. Users in motion may have more frequent temporal snapshots, but the spatial resolution still remains coarse subject to the coverage area of an AP. 
+          
       [Evaluating Next]
         Dartmouth WLAN mobility trace
         Two years the sequence of wireless cells frequented by more than 6k users.
@@ -27,34 +38,51 @@ Spatiotemporal Granularity
       
     [Human Mobility]
       CDRs from Los Angelos and New York for the span of 3 months. Hundreds of thousands of phones, billions of location samples.
-    [From Cells]
-      Spatiotemporal sparsity of CDRs can be complemented by tieing together information on cellular network topology and underlying road networks.
-    [Limits]
-    [Approaching]
-    [The Impact]
-    [Are][User mobility from] analyzes a superset of CDRs which, along with including records for voice calls and SMS, also includes data sessions initiated by the mobile phone, either as a part of user-initiated activity (e.g. querying a search engine) or device-initiated activities (e.g. push-updated email client).
-    [User mobility from] is the only paper to acknowledge that inaccuracies in cellular phone tower datasets, in which coverage areas often overlap, and a phone may exhibit round-robin handoffs with all neighboring towers without moving at all.
-    [Unraveling]
-    [Exploring]
+
+    [zhang_user_2014] is the only paper to acknowledge that inaccuracies in cellular phone tower datasets, in which coverage areas often overlap, and a phone may exhibit round-robin handoffs with all neighboring towers without moving at all.
+    [schneider_unravelling_2013]
+    [zhang_exploring_2014]
     [Understanding individual]
       Two datasets, one being CDRs, and another being regular interval (every two hours) of cell tower location.
       Average service area of each tower is approximately 3km^2, with over 30% towers covering area of 1 km^2 or less, due to higher density of towers for areas with increase cell phone usage (i.e. urban areas)
-    [From Cells]
-      Coarseness of CDRs may be complemented by understanding the cellular network topology in use, as well as observing the road network existing in a coverage area.
-      Cell* was able to identify stationary positions with a median error of 230 meters, comparable to GSM triagulation technologies which use active probing of subscriber's signal strength.
-      Mobile devices in motion had an even more improved median error of 70 meters through path inference, with a further improvement of a mobile trajectory being observed as the velocity of the device increases.
-    [Limits]
-      From CDRs, approximately 70% of hour-long intervals during the observation period have no location updates due to no phone calls being made. These periods of silent periods exist in smaller proportions when using data session records [User mobility from].
-    [Evaluating Next]
-      WiFi access point registration also exhibits spatially and temporally coarse resolutions for stationary users. Users in motion may have more frequent temporal snapshots, but the spatial resolution still remains coarse subject to the coverage area of an AP. 
 
+    [Limits]
+      From CDRs, approximately 70% of hour-long intervals during the observation period have no location updates due to no phone calls being made. These periods of silent periods exist in smaller proportions when using data session records [zhang_user_2014].
+
+
+
+
+    Papers using WiFi AP Registrations as location data:
+      [Evaluating Next]
+      [NextCell]
+    
+    Papers using CDRs:
+      [Limits]
+      [schneider_unravelling_2013]
+      [zhang_exploring_2014]
+      [Understanding individual]
+      [zhang_user_2014]
+      [Approaching]
+      [The Impact]
+      [Human Mobility]
+      [Evaluating Mobility Models]
+      [Friendship and Mobility]
+
+      
+    Improvement to CDRs:
+      [From Cells]
+        Coarseness of CDRs may be complemented by understanding the cellular network topology in use, as well as observing the road network existing in a coverage area.
+        Cell* was able to identify stationary positions with a median error of 230 meters, comparable to GSM triagulation technologies which use active probing of subscriber's signal strength.
+        Mobile devices in motion had an even more improved median error of 70 meters through path inference, with a further improvement of a mobile trajectory being observed as the velocity of the device increases.
+      [Are][zhang_user_2014] analyzes a superset of CDRs which, along with including records for voice calls and SMS, also includes data sessions initiated by the mobile phone, either as a part of user-initiated activity (e.g. querying a search engine) or device-initiated activities (e.g. push-updated email client).
+      [Time-Clustering]
+        Call Detail Records for voice calls, SMS, and data sessions through the Sprint CDMA network of San Francisco area.
+        Location was further estimated by analyzing travel time of the signal from the mobile device to the base station and through the use of trilaterialation. (footnote: it should be noted that having a co-author working for a major telecommunications provider provides one with a rich collection of data otherwise unaccessible to the researching community)
+        Median of accuracy is 200 meters with a variable of 200 meters.
 
 
   Spatially coarse, Temporally fine
-    [Time-Clustering]
-      Call Detail Records for voice calls, SMS, and data sessions through the Sprint CDMA network of San Francisco area.
-      Location was further estimated by analyzing travel time of the signal from the mobile device to the base station and through the use of trilaterialation. (footnote: it should be noted that having a co-author working for a major telecommunications provider provides one with a rich collection of data otherwise unaccessible to the researching community)
-      Median of accuracy is 200 meters with a variable of 200 meters.
+    
 
   Spatially fine, Temporally fine
     WiFi signatures 
@@ -182,7 +210,7 @@ The Predictability of Human Mobility
         Three methods of entropy were used for analysis.
           Random entropy, temporal-uncorrelated entropy, and actual entropy (depends on freq of visitation and order and time spent at each location)
       [The Impact]
-      [Are][User mobility from] from the point of view of higher-frequency data records associated with 2G/3G/4G connectivity.
+      [Are][zhang_user_2014] from the point of view of higher-frequency data records associated with 2G/3G/4G connectivity.
     Radius of gyration
       "The characteristic distance travelled by a user a when observed up to time t" [Understanding]
       [Time-Clustering]
@@ -199,7 +227,7 @@ The Predictability of Human Mobility
         Markov-chain based prediction model looked at the feasibility of approaching the upper bound limit of predictability.
       [The Impact]
       [Are]
-      [Unraveling] found that the radius of gyration is often very chaotic during an initial observation window, and does not stabilize until a few months of observations has been accumulated. 
+      [schneider_unravelling_2013] found that the radius of gyration is often very chaotic during an initial observation window, and does not stabilize until a few months of observations has been accumulated. 
     Step size: how much distance was recorded between consecutive records
       [Time-Clustering]
       [Understanding]
@@ -215,7 +243,7 @@ The Predictability of Human Mobility
       [Understanding]
         Peaks occur at 24h, 48 h, 72h, indicating a strong tendencies for people to return regularly to locations visited before.
     Number of different visited locations
-      [Unraveling] observed the shape of an observed distribution for the number of unique locations visited in one day follows a log-normal distribution.
+      [schneider_unravelling_2013] observed the shape of an observed distribution for the number of unique locations visited in one day follows a log-normal distribution.
         90% of the population visits less than seven locations on a daily basis, found to be common across multiple cities and multiple datasets.
 
    Cold start problem
@@ -233,7 +261,7 @@ The Predictability of Human Mobility
       Results: location and time contexts were the best predictors for conditional transitions in movement
     [Time-Clustering][The Impact]
       Time of day/day of week has an impact on entropy, size of mobility and spatial distribution. Entropy is the smallest impacted. Radius of gyration, step size, spatial distriubtion change significantly based on the day and time.
-    [Unraveling] Intracity daily motion activity.
+    [schneider_unravelling_2013] Intracity daily motion activity.
 
 
   [Friendship and Mobility]
@@ -268,7 +296,7 @@ The Predictability of Human Mobility
     Lacks a constructive algorithm to approach this upper bound.
     Plus, knowing an upper bound is not very useful if this upper bound is not relatively tight. One can easily claim "I am at most 100% certain that 2+2=5" without being wrong.
   [A Refined] realizes this issue and focuses on tightening the bounds of location predictability.
-  [User mobility from] also investigates the characteristics of movement data extracted from data records, as compared to purely CDRs and LBSN checkins.
+  [zhang_user_2014] also investigates the characteristics of movement data extracted from data records, as compared to purely CDRs and LBSN checkins.
 
 
 ====================================
@@ -287,7 +315,7 @@ Synthetic Models
         2. Model of temporal movement between locations
         3. Model of movement influenced by social network (e.g. meeting friends)
       Day-specific periodic model
-    [Unraveling] looks at statistically reproducing the mobility patterns of intracity, daily movements.
+    [schneider_unravelling_2013] looks at statistically reproducing the mobility patterns of intracity, daily movements.
     [Evaluating Next] found through training of an O(2) Markov predictor with a fallback for previously unseen conditional context found median prediction accuracy of 63%, with 72% accuracy being reached with users having 1,000k or more cell crossings. However, the authors comment that there was significant variance between the predictor's accuracy between users.
   Population density models
     [Human Mobility]

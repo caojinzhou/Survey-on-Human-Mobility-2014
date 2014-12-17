@@ -103,7 +103,7 @@
 
 % *** CITATION PACKAGES ***
 %
-%\usepackage{cite}
+\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of IEEE. Loading the cite package will
@@ -484,6 +484,16 @@ What follows is a survey on recent developments in the analysis of human mobilit
 In this section, a categorization of human mobility data sources is constructed based on the granularities and frequencies present in the data sources used by the surveyed research papers. The goal here is to better understand what types of data have been analyzed, and what are some important characteristics of various data sets. The granularity of data applies to the spatial or temporal accuracy that one data record provides. For instance, a data set with coarse spatial granularity implies that a provided geographic location represents a region with a larger area than a data set with fine spatial granularity.
 
 \subsection{Spatially Coarse and Temporally Sparse Datasets}
+
+The most widely used datasets for evaluating human mobility have exhibited high temporal irregularities and spatial coarseness: call detail records (CDRs) for cellular telephones and WiFi Access Point registration logs. Common between these two data sets is the association of a user's location to that of the base station's location. However, the true location of a wireless user may be at any place where a wireless communication channel can be established between the user's device and the base station, which is often represented as a circular/hexagonal wireless connectivity range, or as a Voronoi diagram that partitions the extent of the available 2D space \cite{gonzalez_understanding_2008,song_limits_2010}. This contributes to the spatial coarseness of the datasets. The temporal sparsity primarily due to human-initiated activities on their wireless device.
+    
+\subsubsection{Call Detail Records}
+
+CDRs represent either a voice call or an SMS occurring between two phones preserved by telecommunication companies for purposes of billing. These records have associated with them the unique identifier of the receiver and the initiater of a call, the starting and ending time of the call, and the unique identifier of the cellular tower being used as a basestation. Cross referencing the tower's identifier with the company's geographic information systems (GIS) provides the geographic coordinates of the tower. The set of surveyed papers performaning analysis on CDRs is \cite{gonzalez_understanding_2008, song_limits_2010, deville_dynamic_2014, schneider_unravelling_2013, zhang_exploring_2014, zhang_user_2014, lu_approaching_2013, motahari_impact_2012, isaacman_human_2012, chon_evaluating_2012, cho_friendship_2011, leontiadis_cells_2014, ranjan_are_2012, gatmir-motahari_time-clustering-based_2013, zhang_nextcell:_2013}. Although these datasets are widely recorded and archived by telecommunication companies, privacy concerns and trade secrets primarily prevent such data being publicly accessible for scrutiny. The only publicly available CDR dataset of which this author is currently aware is MIT Reality Mining\footnote{http://realitycommons.media.mit.edu/realitymining.html}. It is observed that many of the aforementioned papers have co-authors with email domains associated with large telecommunication companies, thus hinting that strategic partnerships may enable one access to such information.
+
+\subsubsection{WiFi Registration logs}
+
+WiFi registration logs represent the action of a WiFi-enabled device attempting to connect to a WiFi Access Point (AP). Upon successful registration, the device's unique MAC address is recorded, along with the MAC address of the connected AP and the time of registration. Cross referencing the AP's MAC address with an appropriate GIS produces a geographic location of the stationary AP. WiFi registration logs do not record any activity occuring over the wireless channel, such as the downloading of content through the Internet or the deregistration of a device, and thus only represent the creation of a wireless channel. Research relying on the analysis of WiFi registration logs are \cite{song_evaluating_2006, zhang_nextcell:_2013}.
 
 \subsection{Spatially Coarse and Temporally Frequent Datasets}
 
