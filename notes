@@ -4,6 +4,38 @@ Introduction
 
 Spatiotemporal Granularity
   Spatially coarse, Temporally coarse
+    
+    WiFi contact paths
+      [Evaluating Next]
+        Dartmouth WLAN mobility trace
+        Two years the sequence of wireless cells frequented by more than 6k users.
+        Data records registration of devices to APs, and not the physical movement of human users.
+        Location of users may be estimated based on the location of the AP they access.
+
+    Call Detail Records
+     [Friendship and Mobility]
+      European cell phone service provider.
+      Two million users, 450 million phone calls, 455 days.
+      Each call records nearest cell tower to both sender and recipient of call.
+      Spatially accuracy of approximately 3km.
+      Only consider calls between recipients at least five times, between people in the same country.
+     [Evaluating Mobility Models]
+      For a city such as Seoul, average number of places in most associated cell-tower regions is 11+/- 2.
+      A person could visit 11 different places, but the sequence of visits would be lost due to the spatial coarseness of cell tower coverage.
+      Likewise, a person under a cell tower could be at any one of the 11 locations ,or they could simply be passing through the location without visiting any of the locations.
+      Mobility data captured by cell towers could indicate that a person visited 11 different places.
+      
+    [Human Mobility]
+      CDRs from Los Angelos and New York for the span of 3 months. Hundreds of thousands of phones, billions of location samples.
+    [From Cells]
+      Spatiotemporal sparsity of CDRs can be complemented by tieing together information on cellular network topology and underlying road networks.
+    [Limits]
+    [Approaching]
+    [The Impact]
+    [Are][User mobility from] analyzes a superset of CDRs which, along with including records for voice calls and SMS, also includes data sessions initiated by the mobile phone, either as a part of user-initiated activity (e.g. querying a search engine) or device-initiated activities (e.g. push-updated email client).
+    [User mobility from] is the only paper to acknowledge that inaccuracies in cellular phone tower datasets, in which coverage areas often overlap, and a phone may exhibit round-robin handoffs with all neighboring towers without moving at all.
+    [Unraveling]
+    [Exploring]
     [Understanding individual]
       Two datasets, one being CDRs, and another being regular interval (every two hours) of cell tower location.
       Average service area of each tower is approximately 3km^2, with over 30% towers covering area of 1 km^2 or less, due to higher density of towers for areas with increase cell phone usage (i.e. urban areas)
@@ -15,11 +47,15 @@ Spatiotemporal Granularity
       From CDRs, approximately 70% of hour-long intervals during the observation period have no location updates due to no phone calls being made. These periods of silent periods exist in smaller proportions when using data session records [User mobility from].
     [Evaluating Next]
       WiFi access point registration also exhibits spatially and temporally coarse resolutions for stationary users. Users in motion may have more frequent temporal snapshots, but the spatial resolution still remains coarse subject to the coverage area of an AP. 
+
+
+
   Spatially coarse, Temporally fine
     [Time-Clustering]
       Call Detail Records for voice calls, SMS, and data sessions through the Sprint CDMA network of San Francisco area.
       Location was further estimated by analyzing travel time of the signal from the mobile device to the base station and through the use of trilaterialation. (footnote: it should be noted that having a co-author working for a major telecommunications provider provides one with a rich collection of data otherwise unaccessible to the researching community)
       Median of accuracy is 200 meters with a variable of 200 meters.
+
   Spatially fine, Temporally fine
     WiFi signatures 
     [Evaluating Mobility Models]
@@ -32,14 +68,7 @@ Spatiotemporal Granularity
       WiFi signatures can be used to calculate a user's location based on nearby WiFi access points
       Provides better resolution than cell tower based methods
       Requires WiFi hotspots, though it was found that in an urban environment, users spend 2.1 +/- 1.7% of their time in non-WiFi regions [Evaluating]. This may present a problem in rural environments where WiFi adoption or population density may be sparse.
- 
-Real-world data sources
-  WiFi contact paths
-    [Evaluating Next]
-      Dartmouth WLAN mobility trace
-      Two years the sequence of wireless cells frequented by more than 6k users.
-      Data records registration of devices to APs, and not the physical movement of human users.
-      Location of users may be estimated based on the location of the AP they access.
+
   GPS Trajectories
     [A Refined]
     Not available for some indoor locations.
@@ -48,30 +77,12 @@ Real-world data sources
     Problem of ambiguous location associativity when considering a multi-leveled building.
       exact GPS record may correspond to many unique locations on different floors of the same building.
       potentially problematic for malls, sky-scrapers in urban environments
-  Call Detail Records
-    [Friendship and Mobility]
-      European cell phone service provider.
-      Two million users, 450 million phone calls, 455 days.
-      Each call records nearest cell tower to both sender and recipient of call.
-      Spatially accuracy of approximately 3km.
-      Only consider calls between recipients at least five times, between people in the same country.
-    [Evaluating Mobility Models]
-      For a city such as Seoul, average number of places in most associated cell-tower regions is 11+/- 2.
-      A person could visit 11 different places, but the sequence of visits would be lost due to the spatial coarseness of cell tower coverage.
-      Likewise, a person under a cell tower could be at any one of the 11 locations ,or they could simply be passing through the location without visiting any of the locations.
-      Mobility data captured by cell towers could indicate that a person visited 11 different places.
-    [Human Mobility]
-      CDRs from Los Angelos and New York for the span of 3 months. Hundreds of thousands of phones, billions of location samples.
-    [From Cells]
-      Spatiotemporal sparsity of CDRs can be complemented by tieing together information on cellular network topology and underlying road networks.
-    [Limits]
-    [Approaching]
-    [The Impact]
-    [Are][User mobility from] analyzes a superset of CDRs which, along with including records for voice calls and SMS, also includes data sessions initiated by the mobile phone, either as a part of user-initiated activity (e.g. querying a search engine) or device-initiated activities (e.g. push-updated email client).
-    [User mobility from] is the only paper to acknowledge that inaccuracies in cellular phone tower datasets, in which coverage areas often overlap, and a phone may exhibit round-robin handoffs with all neighboring towers without moving at all.
-    [Unraveling]
-    [Exploring]
-  Location-based Social Networks
+     
+
+
+
+  Spatially fine, Temporally coarse
+   Location-based Social Networks
     Richer semantic history.
       Locations in Foursquare are often annotated with unique tags describing a classification of the location.
         e.g. Indian restaurant, historical landmark, supermarket
@@ -97,6 +108,7 @@ Real-world data sources
       Hierarchical extension of the tradtiional kernel approach to avoid over-fitting problems by systematically smoothing an individuals data towards the population data.
       Only used data from weekdays
     Sporatic frequency, bias towards user privacy. Users not willing to share that they visited a sensitive location.
+
   Hybrid Datasets
     Nokia Mobility Data Challenge [Interdependence and predictability][Improving]
       39 users:
@@ -109,9 +121,7 @@ Real-world data sources
     Spatial data is approximately 100 meters resolution.
     Also provides bluetooth proximity.
 
-
 ==============================    
-
 
 Constraint-based Mobility
   Geographic constraints
@@ -208,6 +218,12 @@ The Predictability of Human Mobility
       [Unraveling] observed the shape of an observed distribution for the number of unique locations visited in one day follows a log-normal distribution.
         90% of the population visits less than seven locations on a daily basis, found to be common across multiple cities and multiple datasets.
 
+   Cold start problem
+    [Improving]
+      Transform the transition matrix of a Markov model representing an established users' mobility to the mobility of the new user
+      16% increased accuracy relative to "state of the art predictor", in which lower order Markov model was trained on small amount of data from new user.
+      Transformation framework reaches its upper limit rapidly, but soon begins to degrade after time while the trained Markov model continues to steadily perform better.
+      
   Short-term mobility prediction
     [Where and What]
       "We focus on anticipating human behavior for the very short future (the next ten minutes) and on active time slots of location changes or app usage".
@@ -219,12 +235,6 @@ The Predictability of Human Mobility
       Time of day/day of week has an impact on entropy, size of mobility and spatial distribution. Entropy is the smallest impacted. Radius of gyration, step size, spatial distriubtion change significantly based on the day and time.
     [Unraveling] Intracity daily motion activity.
 
-   Cold start problem
-    [Improving]
-      Transform the transition matrix of a Markov model representing an established users' mobility to the mobility of the new user
-      16% increased accuracy relative to "state of the art predictor", in which lower order Markov model was trained on small amount of data from new user.
-      Transformation framework reaches its upper limit rapidly, but soon begins to degrade after time while the trained Markov model continues to steadily perform better.
-      
 
   [Friendship and Mobility]
     10% of human mobility from cellular mobility data is explained by social ties.
